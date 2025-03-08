@@ -10,7 +10,7 @@ function ProductCategoryPage() {
     const dispatch = useDispatch()
     const { category } = useParams()
     let products = useSelector(state => state.products.products);
-    products = localData.products
+    // products = localData.products
     const productsByCategory = products.filter(item => item.category?.toLowerCase() === category?.toLowerCase());
     const [search, setSearch] = useState('')
     const [filterData, setFilterData] = useState([])

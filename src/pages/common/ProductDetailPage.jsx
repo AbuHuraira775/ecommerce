@@ -1,20 +1,48 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import localData from '../../api/Products.json'
 import Input from '../../components/common/InpComponent';
 import BtnComponent from '../../components/common/BtnComponent';
+import { getProducts } from '../../redux/slices/productSlice'
+import { removeFromCart } from '../../redux/slices/cartSlice';
+import ReviewModal from '../../modals/ReviewModal';
+import { Button } from 'antd';
 
 function ProductDetailPage() {
+    const [isModalOpen, setIsModalOpen] = useState(false)
     const { id } = useParams()
     const [review, setReview] = useState('')
+    const dispatch = useDispatch()
     let products = useSelector(state => state.products.products);
     products = localData.products
     const displayProduct = products.find(item => item.id == id)
     console.log(displayProduct)
-    const addReveiw = ()=>{
+
+    const fetchData = async () => {
+        const response = await fetch(`https://dummyjson.com/products`, {
+            method: "GET"
+        })
+        const data = await response.json()
+        if (response.ok) {
+            dispatch(getProducts(data.products));
+            console.log(data.products)
+
+        }
+    }
+    useEffect(() => {
+        // fetchData();
+
+    }, []);
+
+    const addReveiw = () => {
         displayProduct.reviews.push(review)
     }
+    const removeItemFromcart = (id)=>{
+        alert(id)
+        dispatch(removeFromCart(id))
+    }
+
     return (
         <div>
             <div className="productCard">
@@ -35,7 +63,6 @@ function ProductDetailPage() {
                         <p>{displayProduct.shippingInformation}</p>
                         <p>{displayProduct.warrantyInformation}</p>
                         <p>{displayProduct.weight}</p>
-
                     </div>
                 }
             </div>
@@ -44,25 +71,19 @@ function ProductDetailPage() {
                 <div className="heading">
                     <h2>Customer Review </h2>
                     <div className="reviews">
-                    {displayProduct.reviews.map(review =>{
-                        return <div className="review">
-                            <p> {review.date}</p>
-                            <p> {review.comment}</p>
-                            <p>{review.rating}</p>
-                            <p> {review.date}</p>
-                        </div>
-                    })}
+                        {displayProduct?.reviews.map((review, i) => {
+                            return <div className="review" key={i}>
+                                <p> {review.date}</p>
+                                <p> {review.comment}</p>
+                                <p>{review.rating}</p>
+                                <p> {review.date}</p>
+                            </div>
+                        })}
 
-                    <div className="addReview">
-                        <Input 
-                            type='text'
-                            placeholder="Add your own opinions"
-                            value={review}
-                            onchange={(e)=>setReview(e.target.value)}
-                            name='review'
-                        />
-                        <BtnComponent btnText='Add Review' onClick={addReveiw}/>
-                    </div>
+                        <div className="addReview">
+                        <ReviewModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={addReview} />
+                        <Button  type="primary" onClick={() => setIsModalOpen(true)}>Add Your Review</Button>
+                        </div>
                     </div>
                 </div>
             </div>

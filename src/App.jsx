@@ -5,6 +5,7 @@ import { AdminProtectedRoute, UserProtectedRoute } from './routes/middleware/Pro
 import AdminLayout from './components/AdminLayout/index'
 import AuthLayout from './components/UserLayout/index'
 import GuestLayout from './components/GuestLayout/index'
+import 'antd/dist/reset.css';
 
 function App() {
 

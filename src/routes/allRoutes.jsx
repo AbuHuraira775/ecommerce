@@ -17,6 +17,7 @@ import ProductPage from "../pages/common/ProductPage";
 import ProductDetailPage from "../pages/common/ProductDetailPage";
 import ProductCategoryPage from "../pages/common/ProductCategoryPage";
 import Register from "../pages/public/Register";
+import WishlistPage from "../pages/common/WishlistPage";
 
 const adminRoutes = [
     { path: 'dashboard', component: <Dashboard /> },
@@ -29,11 +30,14 @@ const adminRoutes = [
 
 const userRoutes = [
     { path: '', component: <UserProfile /> },
+    { path: 'product', component: <ProductPage /> },
+    { path: 'product/:id', component: <ProductDetailPage /> },
     { path: 'profile', component: <UserProfile /> },
     { path: 'user-orders', component: <UserOrders /> },
     { path: 'user-settings', component: <UserSettings /> },
     { path: 'cart', component: <Cart /> },
     { path: 'checkout', component: <Checkout /> },
+    { path: 'wishlist', component: <WishlistPage /> },
 ]
 
 const publicRoutes = [
@@ -41,7 +45,7 @@ const publicRoutes = [
     { path: '/login', component: <Login /> },
     { path: '/register', component: <Register /> },
     { path: '/logout', component: <Logout /> },
-    { path: '/products', component: <ProductPage /> },
+    { path: '/product', component: <ProductPage /> },
     { path: '/product/:id', component: <ProductDetailPage /> },
     { path: '/category/:category', component: <ProductCategoryPage /> },
 ];

@@ -1,25 +1,31 @@
 import React from 'react'
-import logo from '../../assets/logo.jpg'
+import logo from '../../assets/images/brand-logi.png'
 import '../header.css'
 import { Link } from 'react-router-dom'
+import { ShoppingCartOutlined, SearchOutlined, HeartOutlined, ShoppingOutlined } from '@ant-design/icons'
+import { Input } from 'antd'
 
 function Header() {
   return (
-    <header className="admin-header ">
-        <Link to='/admin/dashboard'>
-        <div className="admin-header_logo logo-header center">
-          <img className='logo' width={100} src={logo} alt="E-commerce Logo" />
-            <h3>Shopy</h3>
-        </div>
-        </Link>
-        <nav className="admin-header__nav header-links">
-            <ul>
-                <Link to='/products'><li>Products</li></Link>
-                <Link to='/settings'><li>Settings</li></Link>
-                <Link to='/login'><li>Login</li></Link>
-            </ul>
-        </nav>
-       
+    <header className="guest-header header">
+
+      <div className="left">
+        <img src={logo} alt="" width={200}/>
+        <h4>Brand Name</h4>
+      </div>
+
+      <div className="right">
+        <Input
+          placeholder="Search for products..."
+          prefix={<SearchOutlined style={{ color: "gray" }} />}
+          allowClear
+          onPressEnter={(e) => onSearch(e.target.value)} // Trigger search on Enter key
+          style={{ width: 300, borderRadius: 8 }}
+        />
+        <ShoppingOutlined  />
+        <Link to='/login'>Sign In</Link> / <Link to='/register'>Register</Link>
+      </div>
+
     </header>
   )
 }

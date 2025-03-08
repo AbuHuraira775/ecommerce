@@ -1,0 +1,43 @@
+.container{
+    max-width: 100%;
+    padding: 5vw;
+    display: grid;   
+}
+.product-list{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5vw;
+}
+.product{
+    border: 2px solid #333;
+    border-radius: 2vw;
+    padding: 1vw;
+    height: 50vh !important;
+    display: grid;
+    grid-template-rows: 2fr 5fr 1fr;
+    gap: 1vw;
+    background-color: antiquewhite;
+}
+.product img{
+    display: flex;
+    align-items: center;
+    justify-self: center;
+}
+.product .description{
+    background-color: pink;
+    display: grid;
+    gap: .5vw;
+}
+.products h4{
+    color: #333;
+    font-size: 1.1vw;
+}
+.actions{
+    background-color: grey;
+    border: 1px solid black;
+    border-radius: 1vw;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,36 +1,38 @@
 import React from 'react'
-import logo from '../../assets/logo.jpg'
+import logo from '../../assets/images/brand-logi.png'
 import '../header.css'
 import { Link } from 'react-router-dom'
+import { UserOutlined ,ShoppingCartOutlined, SearchOutlined, HeartOutlined, FileTextOutlined, ShoppingOutlined,HeartFilled  } from '@ant-design/icons'
+import { Input } from 'antd'
 
 function Header() {
   return (
+    <header className="admin-header header">
 
-    <header className="admin-header sidebar"  data-simplebar>
-      <div className="admin-header_logo logo-header center">
-        <Link to='/admin/dashboard'>
-          <img className='logo' width={100} src={logo} alt="E-commerce Logo" />
-        </Link>
-        <Link to='/admin/dashboard'>
-          <h3>Shopy</h3>
-        </Link>
-        <div className="burger-icon">
-        
-        </div>
+      <div className="left">
+        <img src={logo} alt="" width={100} />
+        <h4>Brand Name</h4>
       </div>
-      <nav className="admin-header__nav header-links">
-        <ul>
-          <Link to='dashboard'><li>Dashboard</li></Link>
-          <Link to='products'><li>Products</li></Link>
-          <Link to='orders'><li>Orders</li></Link>
-          <Link to='customers'><li>Customers</li></Link>
-          <Link to='settings'><li>Settings</li></Link>
-        </ul>
-      </nav>
-      <div className="admin-header__profile">
-        <Link to='/logout'><button>Logout</button></Link>
+
+      <div className="right">
+        <Input
+          placeholder="Search for products..."
+          prefix={<SearchOutlined style={{ color: "gray" }} />}
+          allowClear
+          onPressEnter={(e) => onSearch(e.target.value)} // Trigger search on Enter key
+          style={{ width: 300, borderRadius: 8 }}
+        />
+        <ShoppingOutlined   />
+        <HeartOutlined  />
+        <HeartFilled  />
+        {/* //dropdown that contains logout */}
+        <UserOutlined /> 
+
+        <Link to='/login'>Sign In</Link> / <Link to='/register'>Register</Link>
       </div>
+
     </header>
+
   )
 }
 
